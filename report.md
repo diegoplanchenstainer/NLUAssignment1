@@ -3,8 +3,8 @@
 The following functions are tested with `sentence = 'I saw the man with a telescope.' `
 
 ## extractDependecyRelFromRoot(sentence)
-The function takes in input a sentence and print the relations between each token in the sentence from the root to the token (eg. `['--root-->', 'saw', '--dobj-->', 'man', '--det-->', 'the']`).
-To do that the sentence is first parsed and a doc object is obtained. Then two nested for loops are used to access every token. To obtain the dependency relation of the token is enough to access its attribute `token.dep_`.
+The function takes in input a sentence and prints the relations between each token in the sentence from the root to the token (eg. `['--root-->', 'saw', '--dobj-->', 'man', '--det-->', 'the']`).
+To do that, the sentence is first parsed and a doc object is obtained. Then two nested for loops are used to access every token. Accessing the token's `.dep_` attribute is enough to obtain its dependency relation.
 
 ```python
 def extractDependecyRelFromRoot(sentence):
@@ -24,7 +24,7 @@ def extractDependecyRelFromRoot(sentence):
 ```
 
 ## extractSubtree(sentence, inputWord)
-The function takes as input a sentence and a string and return the subtree of that word contained in the sentence.
+The function takes as input a sentence and a string and returns the subtree of that word contained in the sentence.
 Since: "A subtree of a tree T is a tree consisting of a node in T and all of its descendants in T." the function returns the subtree of the input word in sentence order, input word included.
 To do that the sentence is parsed and the root of the subtree corresponding to the `inputWord` is obtained through the function `subtreeRoot = [token for token in doc if token.text == inputWord][0]`. Then it is possible to access at the nodes of the subtree cycling over the `subtreeRoot.subtree`.
 
@@ -48,7 +48,7 @@ An output example is:
 ```
 
 ## checkSubtree(sentence, listOfWords)
-The function takes as input a sentence and a list of words. The list is sorted and in order to check if the given list rapresent a tree, a for loop is made cycle over all the possible trees with root as one of the words in the list. Then the subtree is obtained exploiting `extractSubtree()` function by passing it the sentence and the word on which the for loop is cycling over. If the sorted subtree and the list are the same the function will return `True`, `False` otherwise.
+The function takes as input a sentence and a list of words. The list is sorted and in order to check if the given list represent a tree, a for loop is made cycle over all the possible trees with root as one of the words in the list. Then the subtree is obtained exploiting `extractSubtree()` function by passing the sentence to it and the word on which the for loop is cycling over. If the sorted subtree and the list are the same the function will return `True`, if not `False`.
 
 ```python
 def checkSubtree(sentence, listOfWords):
@@ -62,8 +62,8 @@ def checkSubtree(sentence, listOfWords):
 ```
 
 ## headOfSpan(sequenceOfWords)
-Takes as input a sequence of word and return the root of that words.
-The sequence is passed to the nlp parser which returns a doc element, then a span element can be obtained by selecting the desidered elements as in a list (in this case all elements). The span object has an attribute root that is used to return the root.
+The function takes as input a sequence of words and returns the root of those words.
+The sequence is passed to the `nlp` parser which returns a doc element, then a span element can be obtained by selecting the desired elements as in a list (in this case all elements). The span object has an attribute root that is used to return the root.
 
 ```python
 def headOfSpan(sequenceOfWords):
@@ -80,7 +80,7 @@ An output example is:
 ```
 
 ## extractInfo(sentence)
-Takes as input a sentence and returns a dictionary containing as key the relation (`'nsubj'`, `'dobj'`, `'iobj'`) and as value a list containing the words related to the key.
+The function takes as input a sentence and returns a dictionary containing as key the relation (`'nsubj'`, `'dobj'`, `'iobj'`) and as value a list containing the words related to the key.
 In order to do that the sentence is parsed and for every token, if the dependency relation is one of the key above, a list containing the subtree of the token is populated. Then the list is joined in order to have one single string. Afterwards the list is loaded on the dictionary.
 
 ```python
